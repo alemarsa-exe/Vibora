@@ -1,5 +1,5 @@
 from turtle import *
-from random import randrange
+from random import randint, randrange
 from freegames import square, vector
 
 food = vector(0, 0)
@@ -27,10 +27,23 @@ def move():
 
     snake.append(head)
 
-    if head == food:
+    if head == food or (head+10) == food:
         print('Snake:', len(snake))
         food.x = randrange(-15, 15) * 10
         food.y = randrange(-15, 15) * 10
+
+    elif head != food:
+        foodMove = randint(1,2)
+        if foodMove == 1:
+            food.y += 10
+        else:
+            food.x += 10
+        
+        if not inside(food):
+            food.x = randrange(-15, 15) * 10
+            food.y = randrange(-15, 15) * 10
+
+        snake.pop(0)
     else:
         snake.pop(0)
 
